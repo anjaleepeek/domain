@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    .tab { padding: 10px 20px; display: inline-block; cursor: pointer; border: 1px solid #ccc; }
+    .active { background-color: #eee; }
+    .content { padding: 15px; border: 1px solid #ccc; margin-top: -1px; }
+  </style>
+</head>
+<body>
+
+<div x-data="{ tab: 'domains', isAffiliate: true }"> <!-- set isAffiliate with backend -->
+
+  <h2>Welcome, [Username]</h2>
+
+  <!-- Tabs -->
+  <div>
+    <span class="tab" :class="{'active': tab === 'domains'}" @click="tab = 'domains'">My Domains</span>
+    <span class="tab" :class="{'active': tab === 'invoices'}" @click="tab = 'invoices'">My Invoices</span>
+    <template x-if="isAffiliate">
+      <span class="tab" :class="{'active': tab === 'affiliate'}" @click="tab = 'affiliate'">Affiliate</span>
+    </template>
+  </div>
+
+  <!-- Tab Contents -->
+  <div class="content" x-show="tab === 'domains'">
+    <h3>My Domains</h3>
+    <p>example.lk - Active</p>
+  </div>
+
+  <div class="content" x-show="tab === 'invoices'">
+    <h3>My Invoices</h3>
+    <p>Invoice #123 – Rs. 1500 – Paid</p>
+  </div>
+
+  <div class="content" x-show="tab === 'affiliate'" x-show="isAffiliate">
+    <h3>Affiliate Dashboard</h3>
+    <p>Your Link: <strong>https://domainsearch.lk/yourusername</strong></p>
+
+    <h4>Referred Users</h4>
+    <ul>
+      <li>user1 – joined 2024-07-10</li>
+      <li>user2 – joined 2024-07-12</li>
+    </ul>
+
+    <h4>Commission Summary</h4>
+    <p>Total Commission: Rs. 2,000</p>
+    <a href="withdraw.html">Withdraw</a>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ navOpen: false, faqOpen: null, mobileMenuOpen: false }" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>.LK Domain Registration - Your Gateway to Sri Lankan Internet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+            }
+        }
+
+        .menu-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 overflow-x-hidden">
+
+    <!-- Enhanced Navbar with Mobile Menu -->
+    <!-- Header Section - Matches Dashboard Style -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm border-b sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen"
+                        class="lg:hidden text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">.LK</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-800 hidden sm:block">Search Domains LK</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</a>
+                    <a href="#features"
+                        class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Features</a>
+                    <a href="#pricing"
+                        class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Pricing</a>
+                    <a href="#faq" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">FAQ</a>
+                    <a href="#contact"
+                        class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- <button
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-search mr-2"></i>
+                        <span class="hidden sm:inline">Search Domain</span>
+                        <span class="sm:hidden">Search</span>
+                    </button> -->
+
+                    <!-- User Menu -->
+                    <div class="relative" x-data="{ open: false }">
+                        <button @click="open = !open"
+                            class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-blue-600 text-sm"></i>
+                            </div>
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </button>
+
+                        <div x-show="open" @click.away="open = false" x-transition
+                            class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border py-2">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Login
+                            </a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                <i class="fas fa-user-plus mr-2"></i>Register
+                            </a>
+                            <!-- <hr class="my-1"> -->
+                            <!-- <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Sidebar (Add this after the header) -->
+    <div x-show="mobileMenuOpen" @click="mobileMenuOpen = false"
+        x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+        class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+    <div x-show="mobileMenuOpen" x-transition:enter="transition ease-in-out duration-300 transform"
+        x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+        x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="-translate-x-full"
+        class="lg:hidden fixed inset-y-0 left-0 z-50 w-72 bg-white/90 backdrop-blur-md shadow-xl">
+
+        <div class="flex flex-col h-full">
+            <!-- Mobile Menu Header -->
+            <div class="p-6 border-b">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">.LK</span>
+                        </div>
+                        <span class="text-xl font-bold text-gray-800">Search Domains LK</span>
+                    </div>
+                    <button @click="mobileMenuOpen = false"
+                        class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Content -->
+            <div class="flex-1 overflow-y-auto py-6">
+                <!-- Navigation Links -->
+                <div class="px-4 mb-6">
+                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Navigation</h4>
+                    <div class="space-y-1">
+                        <a href="#home" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-home mr-3"></i>Home
+                        </a>
+                        <a href="#about" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-info-circle mr-3"></i>About
+                        </a>
+                        <a href="#features" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-star mr-3"></i>Features
+                        </a>
+                        <a href="#pricing" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-tags mr-3"></i>Pricing
+                        </a>
+                        <a href="#faq" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-question-circle mr-3"></i>FAQ
+                        </a>
+                        <a href="#contact" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-phone mr-3"></i>Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Account Section -->
+                <!-- <div class="px-4">
+                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Account</h4>
+                    <div class="space-y-1">
+                        <a href="#" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-sign-in-alt mr-3"></i>Login
+                        </a>
+                        <a href="#" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-user-plus mr-3"></i>Register
+                        </a>
+                        <a href="#" @click="mobileMenuOpen = false"
+                            class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-tachometer-alt mr-3"></i>Dashboard
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Hero Section -->
+    <!-- Replace your hero section with this improved version -->
+    <!-- Replace your hero section content with this improved version -->
+    <section id="home"
+        class="relative min-h-[80vh] md:min-h-[75vh] flex items-center gradient-bg overflow-hidden pt-20 md:pt-24">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-white rounded-full floating-animation"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 bg-white rounded-full floating-animation"
+                style="animation-delay: -2s;"></div>
+            <div class="absolute bottom-40 left-1/4 w-16 h-16 bg-white rounded-full floating-animation"
+                style="animation-delay: -4s;"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 text-center text-white relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Your <span class="text-yellow-300">Perfect</span> <span
+                        class="bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">.LK
+                        Domain</span><br />
+                    Awaits
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100 leading-relaxed">
+                    Lightning-fast 15-minute activation and No business registration required<br />
+                    Instant DNS propagation with Professional support
+                </p>
+
+                <!-- Domain Search -->
+                <div class="max-w-2xl mx-auto mb-8">
+                    <div class="glass-effect rounded-2xl p-6">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1 relative">
+                                <input type="text" placeholder="Enter your perfect domain name..."
+                                    class="w-full px-6 py-4 rounded-xl text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all border-2 border-transparent focus:border-yellow-300">
+                                <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                    <span class="font-semibold">.lk</span>
+                                </div>
+                            </div>
+                            <button
+                                class="bg-gradient-to-r from-white to-blue-100 text-blue-700 font-bold px-8 py-4 rounded-xl hover:from-blue-50 hover:to-blue-200 hover:text-blue-800 transition-all duration-300 pulse-glow shadow-lg">
+                                <i class="fas fa-search mr-2"></i>Search Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-8 md:mb-0">
+                    <div class="glass-effect rounded-xl p-4 hover-glow transition-all duration-300">
+                        <div class="text-3xl font-bold text-yellow-300">15min</div>
+                        <div class="text-white">Fast Activation</div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-4 hover-glow transition-all duration-300">
+                        <div class="text-3xl font-bold text-yellow-300">24/7</div>
+                        <div class="text-white">Expert Support</div>
+                    </div>
+                    <div class="glass-effect rounded-xl p-4 hover-glow transition-all duration-300">
+                        <div class="text-3xl font-bold text-yellow-300">100%</div>
+                        <div class="text-white">Uptime Guarantee</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="text-blue-600 font-semibold text-lg mb-4">
+                        <i class="fas fa-certificate mr-2"></i>Authorized LK Registrar
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                        Why Choose <span class="text-blue-600">LK Domains?</span>
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                        We are Sri Lanka's most trusted and authorized .LK domain registrar, serving thousands of
+                        satisfied customers. Our streamlined process eliminates bureaucracy while maintaining the
+                        highest standards of security and reliability.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Secure & Reliable</h4>
+                                <p class="text-gray-600">Bank-level security with 99.9% uptime</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-rocket text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Lightning Fast</h4>
+                                <p class="text-gray-600">15-minute activation guaranteed</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-users text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Expert Support</h4>
+                                <p class="text-gray-600">24/7 local customer service</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=500&fit=crop&crop=center"
+                        alt="Professional team working" class="rounded-2xl shadow-2xl">
+                    <div
+                        class="absolute -bottom-6 -left-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-xl shadow-xl">
+                        <div class="text-2xl font-bold">5000+</div>
+                        <div class="text-blue-200">Happy Customers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Powerful <span class="text-blue-600">Features</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Everything you need to establish your online presence with a professional .LK domain
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-glow group">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-clock text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">15-Minute Activation</h3>
+                    <p class="text-gray-600 leading-relaxed">Get your .LK domain live within 15 minutes after order
+                        placement. No waiting, no delays - just instant results.</p>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-glow group">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-network-wired text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Instant DNS Propagation</h3>
+                    <p class="text-gray-600 leading-relaxed">DNS changes go live almost instantly across global
+                        networks. Zero downtime, maximum reliability.</p>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-glow group">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-user-check text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">No Business Registration</h3>
+                    <p class="text-gray-600 leading-relaxed">Perfect for individuals and personal brands. No company
+                        documents or business registration required.</p>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-glow group">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-tools text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Full DNS Control</h3>
+                    <p class="text-gray-600 leading-relaxed">Complete control over your DNS settings with an intuitive
+                        management panel. Advanced features for power users.</p>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-glow group">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-red-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">24/7 Expert Support</h3>
+                    <p class="text-gray-600 leading-relaxed">Our local Sri Lankan support team is available around the
+                        clock to help with any questions or issues.</p>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-glow group">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-lock text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Secure & Protected</h3>
+                    <p class="text-gray-600 leading-relaxed">Advanced security features including domain lock, privacy
+                        protection, and secure DNS management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Simple <span class="text-blue-600">Pricing</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Transparent pricing with no hidden fees. Choose the perfect plan for your needs.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Budget Plan -->
+                <div
+                    class="bg-gradient-to-b from-green-50 to-white p-8 rounded-2xl border-2 border-green-200 hover:border-green-400 transition-all duration-300 hover-glow">
+                    <div class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
+                        Most Affordable
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Budget (CAT3)</h3>
+                    <p class="text-gray-600 text-sm mb-4">Second Level Domains</p>
+                    <div class="mb-6">
+                        <div class="text-3xl font-bold text-green-600 mb-1">Rs. 1,000<span
+                                class="text-lg text-gray-500">/year</span></div>
+                        <div class="text-sm text-gray-500">$12 for foreigners</div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>domain.com.lk</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>domain.org.lk</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>domain.web.lk</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>DNS Management
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>15min Activation
+                        </li>
+                        <!-- <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Email Support</li> -->
+                    </ul>
+                    <button
+                        class="w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-colors font-semibold">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Economy Plan -->
+                <div
+                    class="bg-gradient-to-b from-blue-50 to-white p-8 rounded-2xl border-2 border-blue-200 hover:border-blue-400 transition-all duration-300 hover-glow">
+                    <div class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
+                        Popular Choice
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Economy (CAT2)</h3>
+                    <p class="text-gray-600 text-sm mb-4">Top Level Domain Only</p>
+                    <div class="mb-6">
+                        <div class="text-3xl font-bold text-blue-600 mb-1">Rs. 5,000<span
+                                class="text-lg text-gray-500">/year</span></div>
+                        <div class="text-sm text-gray-500">$36 for foreigners</div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>domain.lk</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>15min Activation
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Priority Support
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>DNS Management
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Secure
+                            Registration</li>
+                    </ul>
+                    <button
+                        class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors font-semibold">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Standard Plan -->
+                <div
+                    class="bg-gradient-to-b from-purple-50 to-white p-8 rounded-2xl border-2 border-purple-500 hover:border-purple-600 transition-all duration-300 hover-glow relative transform scale-105">
+                    <div
+                        class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        Full Package
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Standard (CAT1)</h3>
+                    <p class="text-gray-600 text-sm mb-4">Full Domain Package</p>
+                    <div class="mb-6">
+                        <div class="text-3xl font-bold text-purple-600 mb-1">Rs. 8,000<span
+                                class="text-lg text-gray-500">/year</span></div>
+                        <div class="text-sm text-gray-500">$59 for foreigners</div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>All Second-Level
+                            Domains</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>.com.lk, .org.lk,
+                            .edu.lk</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>.web.lk, .hotel.lk
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>DNS Management
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Priority Support
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-purple-600 text-white py-3 rounded-xl hover:bg-purple-700 transition-colors font-semibold">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Special Plan -->
+                <div
+                    class="bg-gradient-to-b from-amber-50 to-white p-8 rounded-2xl border-2 border-amber-300 hover:border-amber-400 transition-all duration-300 hover-glow">
+                    <div class="bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
+                        Exclusive
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Special (CAT5)</h3>
+                    <p class="text-gray-600 text-sm mb-4">Three Letter & Desirable Names</p>
+                    <div class="mb-6">
+                        <div class="text-3xl font-bold text-amber-600 mb-1">Rs. 15,000<span
+                                class="text-lg text-gray-500">/year</span></div>
+                        <div class="text-sm text-gray-500">$118 for foreigners</div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Three letter
+                            domains (abc.lk)</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>8-10 digit numbers
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>All Second-Level
+                            included</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>15min Activation
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>DNS Management
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-amber-600 text-white py-3 rounded-xl hover:bg-amber-700 transition-colors font-semibold">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div
+                    class="bg-gradient-to-b from-red-50 to-white p-8 rounded-2xl border-2 border-red-300 hover:border-red-400 transition-all duration-300 hover-glow md:col-span-2 lg:col-span-1">
+                    <div class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
+                        Ultra Premium
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Premium (CAT4)</h3>
+                    <p class="text-gray-600 text-sm mb-4">Two Letter & Premium Names</p>
+                    <div class="mb-6">
+                        <div class="text-3xl font-bold text-red-600 mb-1">Rs. 40,000<span
+                                class="text-lg text-gray-500">/year</span></div>
+                        <div class="text-sm text-gray-500">$295 for foreigners</div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Two letter domains
+                            (tv.lk)</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>2-7 digit numbers
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Premium name
+                            selection</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>15min Activation
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>DNS Management
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-red-600 text-white py-3 rounded-xl hover:bg-red-700 transition-colors font-semibold">
+                        Contact Us
+                    </button>
+                </div>
+
+                <div
+                    class="bg-gradient-to-b from-blue-50 to-white p-8 rounded-2xl border-2 border-blue-200 hover:border-blue-400 transition-all duration-300 hover-glow">
+                    <div class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
+                        💡 Need help choosing?
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Conatct Experts</h3>
+                    <p class="text-gray-600 text-sm mb-4">Personalized Recommendations</p>
+                    <div class="mb-6">
+                        <div class="text-3xl font-bold text-blue-600 mb-1">All Prices<span
+                                class="text-lg text-gray-500">/year</span></div>
+                        <div class="text-sm text-gray-500">Select the perfect domain</div>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>No BR required
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>DNS Management
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Priority Support
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>No hidden charges
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>No setup fees</li>
+                    </ul>
+                    <button
+                        class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors font-semibold">
+                        Get Started
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- <div class="text-center mt-12">
+                <p class="text-gray-600 mb-4">All prices are per year. No setup fees or hidden charges.</p>
+                <div class="bg-blue-50 p-6 rounded-xl max-w-2xl mx-auto">
+                    <h4 class="font-semibold text-gray-800 mb-2">💡 Need help choosing?</h4>
+                    <p class="text-gray-600">Our experts can help you select the perfect domain category for your needs.
+                        Contact us for personalized recommendations!</p>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    What Our <span class="text-blue-600">Clients Say</span>
+                </h2>
+                <p class="text-xl text-gray-600">Trusted by thousands of satisfied customers across Sri Lanka</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face"
+                            alt="Kavindu" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <div class="font-bold text-gray-800">Kavindu Perera</div>
+                            <div class="text-blue-600 text-sm">Startup Founder, Colombo</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"Amazing service! Got my domain in under 10 minutes. The support
+                        team was incredibly helpful and responsive. Highly recommended!"</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b056d4f2?w=60&h=60&fit=crop&crop=face"
+                            alt="Anusha" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <div class="font-bold text-gray-800">Anusha Silva</div>
+                            <div class="text-blue-600 text-sm">Blogger, Kandy</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"Perfect for personal branding! No company documents needed and the
+                        process was super smooth. Love the instant DNS updates!"</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face"
+                            alt="Ruwan" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <div class="font-bold text-gray-800">Ruwan Fernando</div>
+                            <div class="text-blue-600 text-sm">Web Developer, Galle</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"Best .LK provider I've used. The DNS management panel is excellent
+                        and technical support is top-notch. Will definitely use again!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Frequently Asked <span class="text-blue-600">Questions</span>
+                </h2>
+                <p class="text-xl text-gray-600">Everything you need to know about .LK domain registration</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button @click="faqOpen = faqOpen === 1 ? null : 1"
+                        class="w-full text-left font-semibold text-lg bg-gray-50 hover:bg-gray-100 p-6 transition-colors flex items-center justify-between">
+                        <span>Do I need a company to register a .LK domain?</span>
+                        <i class="fas fa-chevron-down transition-transform"
+                            :class="faqOpen === 1 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="faqOpen === 1" x-transition
+                        class="p-6 bg-white text-gray-700 border-t border-gray-200">
+                        No, absolutely not! We specialize in individual registrations. You can register a .LK domain as
+                        a person without any business documents, company registration, or corporate paperwork. Perfect
+                        for personal websites, blogs, portfolios, and individual branding.
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button @click="faqOpen = faqOpen === 2 ? null : 2"
+                        class="w-full text-left font-semibold text-lg bg-gray-50 hover:bg-gray-100 p-6 transition-colors flex items-center justify-between">
+                        <span>How fast will my domain be activated?</span>
+                        <i class="fas fa-chevron-down transition-transform"
+                            :class="faqOpen === 2 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="faqOpen === 2" x-transition
+                        class="p-6 bg-white text-gray-700 border-t border-gray-200">
+                        Your .LK domain will be activated within 15 minutes of successful payment and verification. In
+                        most cases, domains are live within 5-10 minutes. You'll receive email confirmation once your
+                        domain is active and ready to use.
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button @click="faqOpen = faqOpen === 3 ? null : 3"
+                        class="w-full text-left font-semibold text-lg bg-gray-50 hover:bg-gray-100 p-6 transition-colors flex items-center justify-between">
+                        <span>Can I manage my DNS settings?</span>
+                        <i class="fas fa-chevron-down transition-transform"
+                            :class="faqOpen === 3 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="faqOpen === 3" x-transition
+                        class="p-6 bg-white text-gray-700 border-t border-gray-200">
+                        Yes! Full DNS control is included with all domains. You get access to our intuitive DNS
+                        management panel where you can configure A records, CNAME records, MX records, TXT records, and
+                        more. Changes propagate instantly across our global network.
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button @click="faqOpen = faqOpen === 4 ? null : 4"
+                        class="w-full text-left font-semibold text-lg bg-gray-50 hover:bg-gray-100 p-6 transition-colors flex items-center justify-between">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down transition-transform"
+                            :class="faqOpen === 4 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="faqOpen === 4" x-transition
+                        class="p-6 bg-white text-gray-700 border-t border-gray-200">
+                        We accept all major credit cards, debit cards, bank transfers, and popular Sri Lankan payment
+                        methods including mobile payments and online banking. International customers can pay via
+                        PayPal, Stripe, or wire transfer.
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-xl overflow-hidden">
+                    <button @click="faqOpen = faqOpen === 5 ? null : 5"
+                        class="w-full text-left font-semibold text-lg bg-gray-50 hover:bg-gray-100 p-6 transition-colors flex items-center justify-between">
+                        <span>Is technical support included?</span>
+                        <i class="fas fa-chevron-down transition-transform"
+                            :class="faqOpen === 5 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="faqOpen === 5" x-transition
+                        class="p-6 bg-white text-gray-700 border-t border-gray-200">
+                        Absolutely! Our expert technical support team is available 24/7 via email, live chat, and phone.
+                        We provide free assistance with domain setup, DNS configuration, troubleshooting, and any
+                        technical questions you may have.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Get In <span class="text-blue-600">Touch</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ready to secure your perfect .LK domain? Our team is here to help you get started.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Send us a message</h3>
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">First Name</label>
+                                <input type="text" placeholder="John"
+                                    class="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Last Name</label>
+                                <input type="text" placeholder="Doe"
+                                    class="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                            <input type="email" placeholder="john@example.com"
+                                class="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                            <input type="tel" placeholder="+94 77 123 4567"
+                                class="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Desired Domain</label>
+                            <input type="text" placeholder="yourawesome domain.lk"
+                                class="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                            <textarea rows="4" placeholder="Tell us about your project and how we can help..."
+                                class="w-full border border-gray-300 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"></textarea>
+                        </div>
+                        <button
+                            class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-blue-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Call Us</h4>
+                                <p class="text-gray-600 mb-2">Speak directly with our domain experts</p>
+                                <div class="space-y-1">
+                                    <div class="text-blue-600 font-semibold">+94 11 234 5678</div>
+
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">24/7 Support Available</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Email Us</h4>
+                                <p class="text-gray-600 mb-2">Get detailed answers to your questions</p>
+                                <div class="space-y-1">
+                                    <div class="text-green-600 font-semibold">domains@lkdomains.lk</div>
+
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Response within 2 hours</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-purple-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">Visit Us</h4>
+                                <p class="text-gray-600 mb-2">Come see us at our office</p>
+                                <div class="text-purple-600 font-semibold">
+                                    123 Galle Road,<br>
+                                    Colombo 03,<br>
+                                    Sri Lanka
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Mon-Fri: 9AM-6PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-2xl">
+                        <h4 class="text-xl font-semibold mb-4">Need Immediate Help?</h4>
+                        <p class="mb-4">Chat with our live support team right now!</p>
+                        <button
+                            class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-comments mr-2"></i>Start Live Chat
+                        </button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-globe text-white text-xl"></i>
+                        </div>
+                        <div
+                            class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            LK Domains
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6 max-w-md">
+                        Sri Lanka's most trusted .LK domain registrar. We've been helping individuals and businesses
+                        establish their online presence since 2010.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors">About Us</a>
+                        </li>
+                        <li><a href="#features" class="text-gray-300 hover:text-blue-400 transition-colors">Features</a>
+                        </li>
+                        <li><a href="#pricing" class="text-gray-300 hover:text-blue-400 transition-colors">Pricing</a>
+                        </li>
+                        <li><a href="#faq" class="text-gray-300 hover:text-blue-400 transition-colors">FAQ</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition-colors">Domain
+                                Registration</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition-colors">Domain Transfer</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition-colors">DNS Management</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+            </div>
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                <p class="text-lg font-bold">LK Domains</p>
+                <p class="mt-2">© 2025 All rights reserved. Designed by Peek Hosting</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

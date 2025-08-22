@@ -1,0 +1,89 @@
+<aside
+                class="fixed lg:static inset-y-0 left-0 z-50 w-64 lg:w-72 xl:w-80 bg-white/90 backdrop-blur-md shadow-xl rounded-xl transform lg:transform-none sidebar-transition lg:flex-shrink-0"
+                :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
+
+                <!-- Sidebar Overlay for Mobile -->
+                <div x-show="sidebarOpen" @click="sidebarOpen = false"
+                    class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+                <div class="relative z-50 h-full bg-white/90 backdrop-blur-md rounded-xl">
+                    <!-- Mobile Close Button -->
+                    <button @click="sidebarOpen = false" 
+                            class="lg:hidden absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors z-10">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+
+                    <!-- User Profile Section -->
+                    <div class="p-6 border-b rounded-t-xl">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user-circle text-blue-600 text-2xl"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="font-semibold text-gray-900 truncate" x-text="user.name"></h3>
+                                <p class="text-sm text-gray-600 truncate" x-text="user.email"></p>
+                                <div x-show="!user.verified" class="mt-1">
+                                    <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Not
+                                        Verified</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Menu -->
+                    <nav class="mt-6">
+                        <!-- Dashboard Section -->
+                        <div class="px-4 mb-6">
+                            <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Dashboard</h4>
+                            <div class="space-y-1">
+                                <a href="dashboard.html" @click="currentPage = 'home'; sidebarOpen = false"
+                                    class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                    :class="currentPage === 'home' ? 'bg-blue-50 text-blue-700' : ''">
+                                    <i class="fas fa-home mr-3"></i>Home
+                                </a>
+                                <a href="domains.html" @click="currentPage = 'domains'; sidebarOpen = false"
+                                    class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                    :class="currentPage === 'domains' ? 'bg-blue-50 text-blue-700' : ''">
+                                    <i class="fas fa-globe mr-3"></i>Domains
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Billing Section -->
+                        <div class="px-4 mb-6">
+                            <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Billing</h4>
+                            <div class="space-y-1">
+                                <a href="invoice.html" @click="currentPage = 'invoices'; sidebarOpen = false"
+                                    class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                    :class="currentPage === 'invoices' ? 'bg-blue-50 text-blue-700' : ''">
+                                    <i class="fas fa-file-invoice mr-3"></i>Invoices
+                                </a>
+                                <a href="#"
+                                    class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                                    <i class="fas fa-ban mr-3"></i>Cancelled Invoices
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Account Section -->
+                        <div class="px-4">
+                            <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Account</h4>
+                            <div class="space-y-1">
+                                <a href="#" @click="currentPage = 'profile'; sidebarOpen = false"
+                                    class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                    :class="currentPage === 'profile' ? 'bg-blue-50 text-blue-700' : ''">
+                                    <i class="fas fa-user mr-3"></i>My Profile
+                                </a>
+                                <a href="#"
+                                    class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                                    <i class="fas fa-shield-alt mr-3"></i>Verify Profile
+                                </a>
+                                <a href="#"
+                                    class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                                    <i class="fas fa-key mr-3"></i>Change Password
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </aside>

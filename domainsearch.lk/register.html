@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen py-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8" x-data="registerForm()">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900">Create Account</h2>
+            <p class="text-gray-600 mt-2">Fill in the details below to register</p>
+        </div>
+
+        <form @submit.prevent="handleRegister" class="space-y-6">
+            <!-- Personal Information -->
+            <div class="border-b border-gray-200 pb-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Personal Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                        <input 
+                            type="text" 
+                            id="first_name" 
+                            x-model="form.first_name"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter first name"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                        <input 
+                            type="text" 
+                            id="last_name" 
+                            x-model="form.last_name"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter last name"
+                            required
+                        >
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="nic" class="block text-sm font-medium text-gray-700 mb-2">National Identity Card (NIC)</label>
+                        <input 
+                            type="text" 
+                            id="nic" 
+                            x-model="form.nic"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter NIC number"
+                            required
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Details -->
+            <div class="border-b border-gray-200 pb-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Account Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            x-model="form.email"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter email address"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            x-model="form.username"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Choose username"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <div class="relative">
+                            <input 
+                                :type="showPassword ? 'text' : 'password'"
+                                id="password" 
+                                x-model="form.password"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+                                placeholder="Enter password"
+                                required
+                            >
+                            <button 
+                                type="button"
+                                @click="showPassword = !showPassword"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                            >
+                                <svg x-show="!showPassword" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                <svg x-show="showPassword" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                        <div class="relative">
+                            <input 
+                                :type="showConfirmPassword ? 'text' : 'password'"
+                                id="confirm_password" 
+                                x-model="form.confirm_password"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
+                                placeholder="Confirm password"
+                                required
+                            >
+                            <button 
+                                type="button"
+                                @click="showConfirmPassword = !showConfirmPassword"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                            >
+                                <svg x-show="!showConfirmPassword" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                <svg x-show="showConfirmPassword" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div x-show="form.confirm_password && form.password !== form.confirm_password" class="text-red-500 text-xs mt-1">
+                            Passwords do not match
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="border-b border-gray-200 pb-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Contact Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="md:col-span-2">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                        <div class="flex">
+                            <select x-model="form.phone_country" class="px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50">
+                                <template x-for="country in phoneCodes" :key="country.code">
+                                    <option :value="country.code" x-text="`${country.flag} ${country.code}`"></option>
+                                </template>
+                            </select>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                x-model="form.phone"
+                                class="flex-1 px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                placeholder="Enter phone number"
+                                required
+                            >
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                        <textarea 
+                            id="address" 
+                            x-model="form.address"
+                            rows="3"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter full address"
+                            required
+                        ></textarea>
+                    </div>
+                    <div>
+                        <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                        <input 
+                            type="text" 
+                            id="city" 
+                            x-model="form.city"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter city"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="postal_code" class="block text-sm font-medium text-gray-700 mb-2">Postal Code</label>
+                        <input 
+                            type="text" 
+                            id="postal_code" 
+                            x-model="form.postal_code"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter postal code"
+                            required
+                        >
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="country" class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                        <select x-model="form.country" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <option value="">Select a country</option>
+                            <template x-for="country in countries" :key="country.code">
+                                <option :value="country.name" x-text="`${country.flag} ${country.name}`"></option>
+                            </template>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms and Submit -->
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <input 
+                        id="terms" 
+                        type="checkbox" 
+                        x-model="form.terms"
+                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
+                        required
+                    >
+                    <label for="terms" class="ml-2 block text-sm text-gray-700">
+                        I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms of Service</a> and 
+                        <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button 
+                    type="submit"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200"
+                    :disabled="loading || form.password !== form.confirm_password"
+                >
+                    <span x-show="!loading">Create Account</span>
+                    <span x-show="loading" class="flex items-center">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Creating account...
+                    </span>
+                </button>
+
+                <div class="text-center">
+                    <p class="text-sm text-gray-600">
+                        Already have an account? 
+                        <a href="login.html" class="font-medium text-blue-600 hover:text-blue-500">
+                            Sign in
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function registerForm() {
+            return {
+                form: {
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    username: '',
+                    password: '',
+                    confirm_password: '',
+                    nic: '',
+                    phone_country: '+1',
+                    phone: '',
+                    address: '',
+                    city: '',
+                    postal_code: '',
+                    country: '',
+                    terms: false
+                },
+                showPassword: false,
+                showConfirmPassword: false,
+                loading: false,
+
+                countries: [
+                    { code: 'AF', name: 'Afghanistan', flag: '🇦🇫' },
+                    { code: 'AL', name: 'Albania', flag: '🇦🇱' },
+                    { code: 'DZ', name: 'Algeria', flag: '🇩🇿' },
+                    { code: 'AS', name: 'American Samoa', flag: '🇦🇸' },
+                    { code: 'AD', name: 'Andorra', flag: '🇦🇩' },
+                    { code: 'AO', name: 'Angola', flag: '🇦🇴' },
+                    { code: 'AI', name: 'Anguilla', flag: '🇦🇮' },
+                    { code: 'AQ', name: 'Antarctica', flag: '🇦🇶' },
+                    { code: 'AG', name: 'Antigua and Barbuda', flag: '🇦🇬' },
+                    { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
+                    { code: 'AM', name: 'Armenia', flag: '🇦🇲' },
+                    { code: 'AW', name: 'Aruba', flag: '🇦🇼' },
+                    { code: 'AU', name: 'Australia', flag: '🇦🇺' },
+                    { code: 'AT', name: 'Austria', flag: '🇦🇹' },
+                    { code: 'AZ', name: 'Azerbaijan', flag: '🇦🇿' },
+                    { code: 'BS', name: 'Bahamas', flag: '🇧🇸' },
+                    { code: 'BH', name: 'Bahrain', flag: '🇧🇭' },
+                    { code: 'BD', name: 'Bangladesh', flag: '🇧🇩' },
+                    { code: 'BB', name: 'Barbados', flag: '🇧🇧' },
+                    { code: 'BY', name: 'Belarus', flag: '🇧🇾' },
+                    { code: 'BE', name: 'Belgium', flag: '🇧🇪' },
+                    { code: 'BZ', name: 'Belize', flag: '🇧🇿' },
+                    { code: 'BJ', name: 'Benin', flag: '🇧🇯' },
+                    { code: 'BM', name: 'Bermuda', flag: '🇧🇲' },
+                    { code: 'BT', name: 'Bhutan', flag: '🇧🇹' },
+                    { code: 'BO', name: 'Bolivia', flag: '🇧🇴' },
+                    { code: 'BA', name: 'Bosnia and Herzegovina', flag: '🇧🇦' },
+                    { code: 'BW', name: 'Botswana', flag: '🇧🇼' },
+                    { code: 'BV', name: 'Bouvet Island', flag: '🇧🇻' },
+                    { code: 'BR', name: 'Brazil', flag: '🇧🇷' },
+                    { code: 'IO', name: 'British Indian Ocean Territory', flag: '🇮🇴' },
+                    { code: 'BN', name: 'Brunei Darussalam', flag: '🇧🇳' },
+                    { code: 'BG', name: 'Bulgaria', flag: '🇧🇬' },
+                    { code: 'BF', name: 'Burkina Faso', flag: '🇧🇫' },
+                    { code: 'BI', name: 'Burundi', flag: '🇧🇮' },
+                    { code: 'KH', name: 'Cambodia', flag: '🇰🇭' },
+                    { code: 'CM', name: 'Cameroon', flag: '🇨🇲' },
+                    { code: 'CA', name: 'Canada', flag: '🇨🇦' },
+                    { code: 'CV', name: 'Cape Verde', flag: '🇨🇻' },
+                    { code: 'KY', name: 'Cayman Islands', flag: '🇰🇾' },
+                    { code: 'CF', name: 'Central African Republic', flag: '🇨🇫' },
+                    { code: 'TD', name: 'Chad', flag: '🇹🇩' },
+                    { code: 'CL', name: 'Chile', flag: '🇨🇱' },
+                    { code: 'CN', name: 'China', flag: '🇨🇳' },
+                    { code: 'CX', name: 'Christmas Island', flag: '🇨🇽' },
+                    { code: 'CC', name: 'Cocos (Keeling) Islands', flag: '🇨🇨' },
+                    { code: 'CO', name: 'Colombia', flag: '🇨🇴' },
+                    { code: 'KM', name: 'Comoros', flag: '🇰🇲' },
+                    { code: 'CG', name: 'Congo', flag: '🇨🇬' },
+                    { code: 'CD', name: 'Congo, Democratic Republic', flag: '🇨🇩' },
+                    { code: 'CK', name: 'Cook Islands', flag: '🇨🇰' },
+                    { code: 'CR', name: 'Costa Rica', flag: '🇨🇷' },
+                    { code: 'CI', name: 'Cote D\'Ivoire', flag: '🇨🇮' },
+                    { code: 'HR', name: 'Croatia', flag: '🇭🇷' },
+                    { code: 'CU', name: 'Cuba', flag: '🇨🇺' },
+                    { code: 'CY', name: 'Cyprus', flag: '🇨🇾' },
+                    { code: 'CZ', name: 'Czech Republic', flag: '🇨🇿' },
+                    { code: 'DK', name: 'Denmark', flag: '🇩🇰' },
+                    { code: 'DJ', name: 'Djibouti', flag: '🇩🇯' },
+                    { code: 'DM', name: 'Dominica', flag: '🇩🇲' },
+                    { code: 'DO', name: 'Dominican Republic', flag: '🇩🇴' },
+                    { code: 'EC', name: 'Ecuador', flag: '🇪🇨' },
+                    { code: 'EG', name: 'Egypt', flag: '🇪🇬' },
+                    { code: 'SV', name: 'El Salvador', flag: '🇸🇻' },
+                    { code: 'GQ', name: 'Equatorial Guinea', flag: '🇬🇶' },
+                    { code: 'ER', name: 'Eritrea', flag: '🇪🇷' },
+                    { code: 'EE', name: 'Estonia', flag: '🇪🇪' },
+                    { code: 'ET', name: 'Ethiopia', flag: '🇪🇹' },
+                    { code: 'FK', name: 'Falkland Islands', flag: '🇫🇰' },
+                    { code: 'FO', name: 'Faroe Islands', flag: '🇫🇴' },
+                    { code: 'FJ', name: 'Fiji', flag: '🇫🇯' },
+                    { code: 'FI', name: 'Finland', flag: '🇫🇮' },
+                    { code: 'FR', name: 'France', flag: '🇫🇷' },
+                    { code: 'GF', name: 'French Guiana', flag: '🇬🇫' },
+                    { code: 'PF', name: 'French Polynesia', flag: '🇵🇫' },
+                    { code: 'TF', name: 'French Southern Territories', flag: '🇹🇫' },
+                    { code: 'GA', name: 'Gabon', flag: '🇬🇦' },
+                    { code: 'GM', name: 'Gambia', flag: '🇬🇲' },
+                    { code: 'GE', name: 'Georgia', flag: '🇬🇪' },
+                    { code: 'DE', name: 'Germany', flag: '🇩🇪' },
+                    { code: 'GH', name: 'Ghana', flag: '🇬🇭' },
+                    { code: 'GI', name: 'Gibraltar', flag: '🇬🇮' },
+                    { code: 'GR', name: 'Greece', flag: '🇬🇷' },
+                    { code: 'GL', name: 'Greenland', flag: '🇬🇱' },
+                    { code: 'GD', name: 'Grenada', flag: '🇬🇩' },
+                    { code: 'GP', name: 'Guadeloupe', flag: '🇬🇵' },
+                    { code: 'GU', name: 'Guam', flag: '🇬🇺' },
+                    { code: 'GT', name: 'Guatemala', flag: '🇬🇹' },
+                    { code: 'GG', name: 'Guernsey', flag: '🇬🇬' },
+                    { code: 'GN', name: 'Guinea', flag: '🇬🇳' },
+                    { code: 'GW', name: 'Guinea-Bissau', flag: '🇬🇼' },
+                    { code: 'GY', name: 'Guyana', flag: '🇬🇾' },
+                    { code: 'HT', name: 'Haiti', flag: '🇭🇹' },
+                    { code: 'HM', name: 'Heard Island & Mcdonald Islands', flag: '🇭🇲' },
+                    { code: 'VA', name: 'Holy See (Vatican City State)', flag: '🇻🇦' },
+                    { code: 'HN', name: 'Honduras', flag: '🇭🇳' },
+                    { code: 'HK', name: 'Hong Kong', flag: '🇭🇰' },
+                    { code: 'HU', name: 'Hungary', flag: '🇭🇺' },
+                    { code: 'IS', name: 'Iceland', flag: '🇮🇸' },
+                    { code: 'IN', name: 'India', flag: '🇮🇳' },
+                    { code: 'ID', name: 'Indonesia', flag: '🇮🇩' },
+                    { code: 'IR', name: 'Iran', flag: '🇮🇷' },
+                    { code: 'IQ', name: 'Iraq', flag: '🇮🇶' },
+                    { code: 'IE', name: 'Ireland', flag: '🇮🇪' },
+                    { code: 'IM', name: 'Isle Of Man', flag: '🇮🇲' },
+                    { code: 'IL', name: 'Israel', flag: '🇮🇱' },
+                    { code: 'IT', name: 'Italy', flag: '🇮🇹' },
+                    { code: 'JM', name: 'Jamaica', flag: '🇯🇲' },
+                    { code: 'JP', name: 'Japan', flag: '🇯🇵' },
+                    { code: 'JE', name: 'Jersey', flag: '🇯🇪' },
+                    { code: 'JO', name: 'Jordan', flag: '🇯🇴' },
+                    { code: 'KZ', name: 'Kazakhstan', flag: '🇰🇿' },
+                    { code: 'KE', name: 'Kenya', flag: '🇰🇪' },
+                    { code: 'KI', name: 'Kiribati', flag: '🇰🇮' },
+                    { code: 'KR', name: 'Korea', flag: '🇰🇷' },
+                    { code: 'KW', name: 'Kuwait', flag: '🇰🇼' },
+                    { code: 'KG', name: 'Kyrgyzstan', flag: '🇰🇬' },
+                    { code: 'LA', name: 'Lao People\'s Democratic Republic', flag: '🇱🇦' },
+                    { code: 'LV', name: 'Latvia', flag: '🇱🇻' },
+                    { code: 'LB', name: 'Lebanon', flag: '🇱🇧' },
+                    { code: 'LS', name: 'Lesotho', flag: '🇱🇸' },
+                    { code: 'LR', name: 'Liberia', flag: '🇱🇷' },
+                    { code: 'LY', name: 'Libyan Arab Jamahiriya', flag: '🇱🇾' },
+                    { code: 'LI', name: 'Liechtenstein', flag: '🇱🇮' },
+                    { code: 'LT', name: 'Lithuania', flag: '🇱🇹' },
+                    { code: 'LU', name: 'Luxembourg', flag: '🇱🇺' },
+                    { code: 'MO', name: 'Macao', flag: '🇲🇴' },
+                    { code: 'MK', name: 'Macedonia', flag: '🇲🇰' },
+                    { code: 'MG', name: 'Madagascar', flag: '🇲🇬' },
+                    { code: 'MW', name: 'Malawi', flag: '🇲🇼' },
+                    { code: 'MY', name: 'Malaysia', flag: '🇲🇾' },
+                    { code: 'MV', name: 'Maldives', flag: '🇲🇻' },
+                    { code: 'ML', name: 'Mali', flag: '🇲🇱' },
+                    { code: 'MT', name: 'Malta', flag: '🇲🇹' },
+                    { code: 'MH', name: 'Marshall Islands', flag: '🇲🇭' },
+                    { code: 'MQ', name: 'Martinique', flag: '🇲🇶' },
+                    { code: 'MR', name: 'Mauritania', flag: '🇲🇷' },
+                    { code: 'MU', name: 'Mauritius', flag: '🇲🇺' },
+                    { code: 'YT', name: 'Mayotte', flag: '🇾🇹' },
+                    { code: 'MX', name: 'Mexico', flag: '🇲🇽' },
+                    { code: 'FM', name: 'Micronesia', flag: '🇫🇲' },
+                    { code: 'MD', name: 'Moldova', flag: '🇲🇩' },
+                    { code: 'MC', name: 'Monaco', flag: '🇲🇨' },
+                    { code: 'MN', name: 'Mongolia', flag: '🇲🇳' },
+                    { code: 'ME', name: 'Montenegro', flag: '🇲🇪' },
+                    { code: 'MS', name: 'Montserrat', flag: '🇲🇸' },
+                    { code: 'MA', name: 'Morocco', flag: '🇲🇦' },
+                    { code: 'MZ', name: 'Mozambique', flag: '🇲🇿' },
+                    { code: 'MM', name: 'Myanmar', flag: '🇲🇲' },
+                    { code: 'NA', name: 'Namibia', flag: '🇳🇦' },
+                    { code: 'NR', name: 'Nauru', flag: '🇳🇷' },
+                    { code: 'NP', name: 'Nepal', flag: '🇳🇵' },
+                    { code: 'NL', name: 'Netherlands', flag: '🇳🇱' },
+                    { code: 'AN', name: 'Netherlands Antilles', flag: '🇦🇳' },
+                    { code: 'NC', name: 'New Caledonia', flag: '🇳🇨' },
+                    { code: 'NZ', name: 'New Zealand', flag: '🇳🇿' },
+                    { code: 'NI', name: 'Nicaragua', flag: '🇳🇮' },
+                    { code: 'NE', name: 'Niger', flag: '🇳🇪' },
+                    { code: 'NG', name: 'Nigeria', flag: '🇳🇬' },
+                    { code: 'NU', name: 'Niue', flag: '🇳🇺' },
+                    { code: 'NF', name: 'Norfolk Island', flag: '🇳🇫' },
+                    { code: 'MP', name: 'Northern Mariana Islands', flag: '🇲🇵' },
+                    { code: 'NO', name: 'Norway', flag: '🇳🇴' },
+                    { code: 'OM', name: 'Oman', flag: '🇴🇲' },
+                    { code: 'PK', name: 'Pakistan', flag: '🇵🇰' },
+                    { code: 'PW', name: 'Palau', flag: '🇵🇼' },
+                    { code: 'PS', name: 'Palestinian Territory', flag: '🇵🇸' },
+                    { code: 'PA', name: 'Panama', flag: '🇵🇦' },
+                    { code: 'PG', name: 'Papua New Guinea', flag: '🇵🇬' },
+                    { code: 'PY', name: 'Paraguay', flag: '🇵🇾' },
+                    { code: 'PE', name: 'Peru', flag: '🇵🇪' },
+                    { code: 'PH', name: 'Philippines', flag: '🇵🇭' },
+                    { code: 'PN', name: 'Pitcairn', flag: '🇵🇳' },
+                    { code: 'PL', name: 'Poland', flag: '🇵🇱' },
+                    { code: 'PT', name: 'Portugal', flag: '🇵🇹' },
+                    { code: 'PR', name: 'Puerto Rico', flag: '🇵🇷' },
+                    { code: 'QA', name: 'Qatar', flag: '🇶🇦' },
+                    { code: 'RE', name: 'Reunion', flag: '🇷🇪' },
+                    { code: 'RO', name: 'Romania', flag: '🇷🇴' },
+                    { code: 'RU', name: 'Russian Federation', flag: '🇷🇺' },
+                    { code: 'RW', name: 'Rwanda', flag: '🇷🇼' },
+                    { code: 'BL', name: 'Saint Barthelemy', flag: '🇧🇱' },
+                    { code: 'SH', name: 'Saint Helena', flag: '🇸🇭' },
+                    { code: 'KN', name: 'Saint Kitts And Nevis', flag: '🇰🇳' },
+                    { code: 'LC', name: 'Saint Lucia', flag: '🇱🇨' },
+                    { code: 'MF', name: 'Saint Martin', flag: '🇲🇫' },
+                    { code: 'PM', name: 'Saint Pierre And Miquelon', flag: '🇵🇲' },
+                    { code: 'VC', name: 'Saint Vincent And Grenadines', flag: '🇻🇨' },
+                    { code: 'WS', name: 'Samoa', flag: '🇼🇸' },
+                    { code: 'SM', name: 'San Marino', flag: '🇸🇲' },
+                    { code: 'ST', name: 'Sao Tome And Principe', flag: '🇸🇹' },
+                    { code: 'SA', name: 'Saudi Arabia', flag: '🇸🇦' },
+                    { code: 'SN', name: 'Senegal', flag: '🇸🇳' },
+                    { code: 'RS', name: 'Serbia', flag: '🇷🇸' },
+                    { code: 'SC', name: 'Seychelles', flag: '🇸🇨' },
+                    { code: 'SL', name: 'Sierra Leone', flag: '🇸🇱' },
+                    { code: 'SG', name: 'Singapore', flag: '🇸🇬' },
+                    { code: 'SK', name: 'Slovakia', flag: '🇸🇰' },
+                    { code: 'SI', name: 'Slovenia', flag: '🇸🇮' },
+                    { code: 'SB', name: 'Solomon Islands', flag: '🇸🇧' },
+                    { code: 'SO', name: 'Somalia', flag: '🇸🇴' },
+                    { code: 'ZA', name: 'South Africa', flag: '🇿🇦' },
+                    { code: 'GS', name: 'South Georgia And Sandwich Isl.', flag: '🇬🇸' },
+                    { code: 'ES', name: 'Spain', flag: '🇪🇸' },
+                    { code: 'LK', name: 'Sri Lanka', flag: '🇱🇰' },
+                    { code: 'SD', name: 'Sudan', flag: '🇸🇩' },
+                    { code: 'SR', name: 'Suriname', flag: '🇸🇷' },
+                    { code: 'SJ', name: 'Svalbard And Jan Mayen', flag: '🇸🇯' },
+                    { code: 'SZ', name: 'Swaziland', flag: '🇸🇿' },
+                    { code: 'SE', name: 'Sweden', flag: '🇸🇪' },
+                    { code: 'CH', name: 'Switzerland', flag: '🇨🇭' },
+                    { code: 'SY', name: 'Syrian Arab Republic', flag: '🇸🇾' },
+                    { code: 'TW', name: 'Taiwan', flag: '🇹🇼' },
+                    { code: 'TJ', name: 'Tajikistan', flag: '🇹🇯' },
+                    { code: 'TZ', name: 'Tanzania', flag: '🇹🇿' },
+                    { code: 'TH', name: 'Thailand', flag: '🇹🇭' },
+                    { code: 'TL', name: 'Timor-Leste', flag: '🇹🇱' },
+                    { code: 'TG', name: 'Togo', flag: '🇹🇬' },
+                    { code: 'TK', name: 'Tokelau', flag: '🇹🇰' },
+                    { code: 'TO', name: 'Tonga', flag: '🇹🇴' },
+                    { code: 'TT', name: 'Trinidad And Tobago', flag: '🇹🇹' },
+                    { code: 'TN', name: 'Tunisia', flag: '🇹🇳' },
+                    { code: 'TR', name: 'Turkey', flag: '🇹🇷' },
+                    { code: 'TM', name: 'Turkmenistan', flag: '🇹🇲' },
+                    { code: 'TC', name: 'Turks And Caicos Islands', flag: '🇹🇨' },
+                    { code: 'TV', name: 'Tuvalu', flag: '🇹🇻' },
+                    { code: 'UG', name: 'Uganda', flag: '🇺🇬' },
+                    { code: 'UA', name: 'Ukraine', flag: '🇺🇦' },
+                    { code: 'AE', name: 'United Arab Emirates', flag: '🇦🇪' },
+                    { code: 'GB', name: 'United Kingdom', flag: '🇬🇧' },
+                    { code: 'US', name: 'United States', flag: '🇺🇸' },
+                    { code: 'UM', name: 'United States Outlying Islands', flag: '🇺🇲' },
+                    { code: 'UY', name: 'Uruguay', flag: '🇺🇾' },
+                    { code: 'UZ', name: 'Uzbekistan', flag: '🇺🇿' },
+                    { code: 'VU', name: 'Vanuatu', flag: '🇻🇺' },
+                    { code: 'VE', name: 'Venezuela', flag: '🇻🇪' },
+                    { code: 'VN', name: 'Viet Nam', flag: '🇻🇳' },
+                    { code: 'VG', name: 'Virgin Islands, British', flag: '🇻🇬' },
+                    { code: 'VI', name: 'Virgin Islands, U.S.', flag: '🇻🇮' },
+                    { code: 'WF', name: 'Wallis And Futuna', flag: '🇼🇫' },
+                    { code: 'EH', name: 'Western Sahara', flag: '🇪🇭' },
+                    { code: 'YE', name: 'Yemen', flag: '🇾🇪' },
+                    { code: 'ZM', name: 'Zambia', flag: '🇿🇲' },
+                    { code: 'ZW', name: 'Zimbabwe', flag: '🇿🇼' }
+                ],
+
+                phoneCodes: [
+                    { code: '+1', flag: '🇺🇸' },
+                    { code: '+7', flag: '🇷🇺' },
+                    { code: '+20', flag: '🇪🇬' },
+                    { code: '+27', flag: '🇿🇦' },
+                    { code: '+30', flag: '🇬🇷' },
+                    { code: '+31', flag: '🇳🇱' },
+                    { code: '+32', flag: '🇧🇪' },
+                    { code: '+33', flag: '🇫🇷' },
+                    { code: '+34', flag: '🇪🇸' },
+                    { code: '+36', flag: '🇭🇺' },
+                    { code: '+39', flag: '🇮🇹' },
+                    { code: '+40', flag: '🇷🇴' },
+                    { code: '+41', flag: '🇨🇭' },
+                    { code: '+43', flag: '🇦🇹' },
+                    { code: '+44', flag: '🇬🇧' },
+                    { code: '+45', flag: '🇩🇰' },
+                    { code: '+46', flag: '🇸🇪' },
+                    { code: '+47', flag: '🇳🇴' },
+                    { code: '+48', flag: '🇵🇱' },
+                    { code: '+49', flag: '🇩🇪' },
+                    { code: '+51', flag: '🇵🇪' },
+                    { code: '+52', flag: '🇲🇽' },
+                    { code: '+53', flag: '🇨🇺' },
+                    { code: '+54', flag: '🇦🇷' },
+                    { code: '+55', flag: '🇧🇷' },
+                    { code: '+56', flag: '🇨🇱' },
+                    { code: '+57', flag: '🇨🇴' },
+                    { code: '+58', flag: '🇻🇪' },
+                    { code: '+60', flag: '🇲🇾' },
+                    { code: '+61', flag: '🇦🇺' },
+                    { code: '+62', flag: '🇮🇩' },
+                    { code: '+63', flag: '🇵🇭' },
+                    { code: '+64', flag: '🇳🇿' },
+                    { code: '+65', flag: '🇸🇬' },
+                    { code: '+66', flag: '🇹🇭' },
+                    { code: '+81', flag: '🇯🇵' },
+                    { code: '+82', flag: '🇰🇷' },
+                    { code: '+84', flag: '🇻🇳' },
+                    { code: '+86', flag: '🇨🇳' },
+                    { code: '+90', flag: '🇹🇷' },
+                    { code: '+91', flag: '🇮🇳' },
+                    { code: '+92', flag: '🇵🇰' },
+                    { code: '+93', flag: '🇦🇫' },
+                    { code: '+94', flag: '🇱🇰' },
+                    { code: '+95', flag: '🇲🇲' },
+                    { code: '+98', flag: '🇮🇷' },
+                    { code: '+212', flag: '🇲🇦' },
+                    { code: '+213', flag: '🇩🇿' },
+                    { code: '+216', flag: '🇹🇳' },
+                    { code: '+218', flag: '🇱🇾' },
+                    { code: '+220', flag: '🇬🇲' },
+                    { code: '+221', flag: '🇸🇳' },
+                    { code: '+222', flag: '🇲🇷' },
+                    { code: '+223', flag: '🇲🇱' },
+                    { code: '+224', flag: '🇬🇳' },
+                    { code: '+225', flag: '🇨🇮' },
+                    { code: '+226', flag: '🇧🇫' },
+                    { code: '+227', flag: '🇳🇪' },
+                    { code: '+228', flag: '🇹🇬' },
+                    { code: '+229', flag: '🇧🇯' },
+                    { code: '+230', flag: '🇲🇺' },
+                    { code: '+231', flag: '🇱🇷' },
+                    { code: '+232', flag: '🇸🇱' },
+                    { code: '+233', flag: '🇬🇭' },
+                    { code: '+234', flag: '🇳🇬' },
+                    { code: '+235', flag: '🇹🇩' },
+                    { code: '+236', flag: '🇨🇫' },
+                    { code: '+237', flag: '🇨🇲' },
+                    { code: '+238', flag: '🇨🇻' },
+                    { code: '+239', flag: '🇸🇹' },
+                    { code: '+240', flag: '🇬🇶' },
+                    { code: '+241', flag: '🇬🇦' },
+                    { code: '+242', flag: '🇨🇬' },
+                    { code: '+243', flag: '🇨🇩' },
+                    { code: '+244', flag: '🇦🇴' },
+                    { code: '+245', flag: '🇬🇼' },
+                    { code: '+246', flag: '🇮🇴' },
+                    { code: '+247', flag: '🇦🇨' },
+                    { code: '+248', flag: '🇸🇨' },
+                    { code: '+249', flag: '🇸🇩' },
+                    { code: '+250', flag: '🇷🇼' },
+                    { code: '+251', flag: '🇪🇹' },
+                    { code: '+252', flag: '🇸🇴' },
+                    { code: '+253', flag: '🇩🇯' },
+                    { code: '+254', flag: '🇰🇪' },
+                    { code: '+255', flag: '🇹🇿' },
+                    { code: '+256', flag: '🇺🇬' },
+                    { code: '+257', flag: '🇧🇮' },
+                    { code: '+258', flag: '🇲🇿' },
+                    { code: '+260', flag: '🇿🇲' },
+                    { code: '+261', flag: '🇲🇬' },
+                    { code: '+262', flag: '🇷🇪' },
+                    { code: '+263', flag: '🇿🇼' },
+                    { code: '+264', flag: '🇳🇦' },
+                    { code: '+265', flag: '🇲🇼' },
+                    { code: '+266', flag: '🇱🇸' },
+                    { code: '+267', flag: '🇧🇼' },
+                    { code: '+268', flag: '🇸🇿' },
+                    { code: '+269', flag: '🇰🇲' },
+                    { code: '+290', flag: '🇸🇭' },
+                    { code: '+291', flag: '🇪🇷' },
+                    { code: '+297', flag: '🇦🇼' },
+                    { code: '+298', flag: '🇫🇴' },
+                    { code: '+299', flag: '🇬🇱' },
+                    { code: '+350', flag: '🇬🇮' },
+                    { code: '+351', flag: '🇵🇹' },
+                    { code: '+352', flag: '🇱🇺' },
+                    { code: '+353', flag: '🇮🇪' },
+                    { code: '+354', flag: '🇮🇸' },
+                    { code: '+355', flag: '🇦🇱' },
+                    { code: '+356', flag: '🇲🇹' },
+                    { code: '+357', flag: '🇨🇾' },
+                    { code: '+358', flag: '🇫🇮' },
+                    { code: '+359', flag: '🇧🇬' },
+                    { code: '+370', flag: '🇱🇹' },
+                    { code: '+371', flag: '🇱🇻' },
+                    { code: '+372', flag: '🇪🇪' },
+                    { code: '+373', flag: '🇲🇩' },
+                    { code: '+374', flag: '🇦🇲' },
+                    { code: '+375', flag: '🇧🇾' },
+                    { code: '+376', flag: '🇦🇩' },
+                    { code: '+377', flag: '🇲🇨' },
+                    { code: '+378', flag: '🇸🇲' },
+                    { code: '+380', flag: '🇺🇦' },
+                    { code: '+381', flag: '🇷🇸' },
+                    { code: '+382', flag: '🇲🇪' },
+                    { code: '+383', flag: '🇽🇰' },
+                    { code: '+385', flag: '🇭🇷' },
+                    { code: '+386', flag: '🇸🇮' },
+                    { code: '+387', flag: '🇧🇦' },
+                    { code: '+389', flag: '🇲🇰' },
+                    { code: '+420', flag: '🇨🇿' },
+                    { code: '+421', flag: '🇸🇰' },
+                    { code: '+423', flag: '🇱🇮' },
+                    { code: '+500', flag: '🇫🇰' },
+                    { code: '+501', flag: '🇧🇿' },
+                    { code: '+502', flag: '🇬🇹' },
+                    { code: '+503', flag: '🇸🇻' },
+                    { code: '+504', flag: '🇭🇳' },
+                    { code: '+505', flag: '🇳🇮' },
+                    { code: '+506', flag: '🇨🇷' },
+                    { code: '+507', flag: '🇵🇦' },
+                    { code: '+508', flag: '🇵🇲' },
+                    { code: '+509', flag: '🇭🇹' },
+                    { code: '+590', flag: '🇬🇵' },
+                    { code: '+591', flag: '🇧🇴' },
+                    { code: '+592', flag: '🇬🇾' },
+                    { code: '+593', flag: '🇪🇨' },
+                    { code: '+594', flag: '🇬🇫' },
+                    { code: '+595', flag: '🇵🇾' },
+                    { code: '+596', flag: '🇲🇶' },
+                    { code: '+597', flag: '🇸🇷' },
+                    { code: '+598', flag: '🇺🇾' },
+                    { code: '+599', flag: '🇧🇶' },
+                    { code: '+670', flag: '🇹🇱' },
+                    { code: '+672', flag: '🇳🇫' },
+                    { code: '+673', flag: '🇧🇳' },
+                    { code: '+674', flag: '🇳🇷' },
+                    { code: '+675', flag: '🇵🇬' },
+                    { code: '+676', flag: '🇹🇴' },
+                    { code: '+677', flag: '🇸🇧' },
+                    { code: '+678', flag: '🇻🇺' },
+                    { code: '+679', flag: '🇫🇯' },
+                    { code: '+680', flag: '🇵🇼' },
+                    { code: '+681', flag: '🇼🇫' },
+                    { code: '+682', flag: '🇨🇰' },
+                    { code: '+683', flag: '🇳🇺' },
+                    { code: '+684', flag: '🇦🇸' },
+                    { code: '+685', flag: '🇼🇸' },
+                    { code: '+686', flag: '🇰🇮' },
+                    { code: '+687', flag: '🇳🇨' },
+                    { code: '+688', flag: '🇹🇻' },
+                    { code: '+689', flag: '🇵🇫' },
+                    { code: '+690', flag: '🇹🇰' },
+                    { code: '+691', flag: '🇫🇲' },
+                    { code: '+692', flag: '🇲🇭' },
+                    { code: '+850', flag: '🇰🇵' },
+                    { code: '+852', flag: '🇭🇰' },
+                    { code: '+853', flag: '🇲🇴' },
+                    { code: '+855', flag: '🇰🇭' },
+                    { code: '+856', flag: '🇱🇦' },
+                    { code: '+880', flag: '🇧🇩' },
+                    { code: '+886', flag: '🇹🇼' },
+                    { code: '+960', flag: '🇲🇻' },
+                    { code: '+961', flag: '🇱🇧' },
+                    { code: '+962', flag: '🇯🇴' },
+                    { code: '+963', flag: '🇸🇾' },
+                    { code: '+964', flag: '🇮🇶' },
+                    { code: '+965', flag: '🇰🇼' },
+                    { code: '+966', flag: '🇸🇦' },
+                    { code: '+967', flag: '🇾🇪' },
+                    { code: '+968', flag: '🇴🇲' },
+                    { code: '+970', flag: '🇵🇸' },
+                    { code: '+971', flag: '🇦🇪' },
+                    { code: '+972', flag: '🇮🇱' },
+                    { code: '+973', flag: '🇧🇭' },
+                    { code: '+974', flag: '🇶🇦' },
+                    { code: '+975', flag: '🇧🇹' },
+                    { code: '+976', flag: '🇲🇳' },
+                    { code: '+977', flag: '🇳🇵' },
+                    { code: '+992', flag: '🇹🇯' },
+                    { code: '+993', flag: '🇹🇲' },
+                    { code: '+994', flag: '🇦🇿' },
+                    { code: '+995', flag: '🇬🇪' },
+                    { code: '+996', flag: '🇰🇬' },
+                    { code: '+998', flag: '🇺🇿' }
+                ],
+
+                handleRegister() {
+                    // Basic validation
+                    if (this.form.password !== this.form.confirm_password) {
+                        alert('Passwords do not match!');
+                        return;
+                    }
+
+                    if (!this.form.terms) {
+                        alert('Please accept the terms and conditions!');
+                        return;
+                    }
+
+                    this.loading = true;
+
+                    // Simulate API call
+                    setTimeout(() => {
+                        console.log('Registration data:', this.form);
+                        
+                        // Here you would typically send the data to your backend
+                        // For demo purposes, we'll just show a success message
+                        alert('Account created successfully! Please check your email to verify your account.');
+                        
+                        this.loading = false;
+                        
+                        // Reset form after successful registration
+                        this.resetForm();
+                    }, 2000);
+                },
+
+                resetForm() {
+                    this.form = {
+                        first_name: '',
+                        last_name: '',
+                        email: '',
+                        username: '',
+                        password: '',
+                        confirm_password: '',
+                        nic: '',
+                        phone_country: '+1',
+                        phone: '',
+                        address: '',
+                        city: '',
+                        postal_code: '',
+                        country: '',
+                        terms: false
+                    };
+                    this.showPassword = false;
+                    this.showConfirmPassword = false;
+                },
+
+                init() {
+                    // Set default country to Sri Lanka since NIC is required
+                    this.form.country = 'Sri Lanka';
+                    this.form.phone_country = '+94';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

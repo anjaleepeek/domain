@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain Details - LK Domains</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+    }
+
+    .glass-card {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hover-scale {
+      transition: all 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-transition {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.5);
+      border-radius: 2px;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(156, 163, 175, 0.8);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 min-h-screen" x-data="{
+    sidebarOpen: false,
+    currentPage: 'domains',
+    user: {
+        name: 'Anjalee Sanduni',
+        email: 'anjaleesanduni554@gmail.com',
+        verified: false,
+        avatar: 'AS'
+    },
+    domainDetails: {
+        name: 'example.lk',
+        category: 'Business',
+        businessName: 'Tech Solutions Lanka',
+        businessType: 'Private Limited Company',
+        registrationNumber: 'PV-123456789',
+        businessAddress: '123, Galle Road, Colombo 03, Sri Lanka',
+        businessPhone: '+94 11 234 5678',
+        reason: 'Official company website for tech solutions business',
+        orderedDate: '2024-12-15',
+        activatedDate: '2024-12-16',
+        expiredDate: '2025-12-15',
+        status: 'active',
+        autoRenew: true,
+        nameservers: ['ns1.lk', 'ns2.lk'],
+        dnsRecords: [
+            { type: 'A', name: '@', value: '192.168.1.1', ttl: '3600' },
+            { type: 'CNAME', name: 'www', value: 'example.lk', ttl: '3600' },
+            { type: 'MX', name: '@', value: 'mail.example.lk', priority: '10', ttl: '3600' }
+        ]
+    },
+    invoices: [
+        {
+            id: 'INV-2024-001',
+            date: '2024-12-15',
+            amount: 2500,
+            status: 'paid',
+            description: 'Domain Registration - example.lk',
+            dueDate: '2024-12-22'
+        },
+        {
+            id: 'INV-2024-045',
+            date: '2024-06-15',
+            amount: 500,
+            status: 'paid',
+            description: 'DNS Management Fee - example.lk',
+            dueDate: '2024-06-22'
+        },
+        {
+            id: 'INV-2024-089',
+            date: '2024-03-10',
+            amount: 300,
+            status: 'overdue',
+            description: 'SSL Certificate - example.lk',
+            dueDate: '2024-03-17'
+        }
+    ],
+    emails: [
+        {
+            id: 1,
+            subject: 'Domain Registration Successful',
+            date: '2024-12-16',
+            type: 'registration',
+            status: 'delivered',
+            preview: 'Your domain example.lk has been successfully registered and activated.'
+        },
+        {
+            id: 2,
+            subject: 'Domain Renewal Reminder',
+            date: '2024-11-15',
+            type: 'reminder',
+            status: 'delivered',
+            preview: 'Your domain example.lk will expire in 30 days. Renew now to avoid disruption.'
+        },
+        {
+            id: 3,
+            subject: 'DNS Configuration Updated',
+            date: '2024-10-20',
+            type: 'notification',
+            status: 'delivered',
+            preview: 'DNS records for example.lk have been successfully updated.'
+        },
+        {
+            id: 4,
+            subject: 'Payment Confirmation',
+            date: '2024-12-15',
+            type: 'payment',
+            status: 'delivered',
+            preview: 'Payment received for domain registration - example.lk'
+        }
+    ],
+    activeTab: 'overview',
+    showRenewModal: false
+}">
+
+  <!-- Header -->
+  <header class="bg-white/80 backdrop-blur-md shadow-sm border-b sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo & Mobile Menu -->
+        <div class="flex items-center space-x-4">
+          <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden text-gray-600 hover:text-gray-900">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-sm">.LK</span>
+            </div>
+            <span class="text-xl font-bold text-gray-800 hidden sm:block">Search Domains LK</span>
+          </div>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="flex items-center space-x-4">
+          <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+            <i class="fas fa-plus mr-2"></i>
+            <span class="hidden sm:inline">Order LK Domain</span>
+            <span class="sm:hidden">Order</span>
+          </button>
+
+          <!-- User Menu -->
+          <div class="relative" x-data="{ open: false }">
+            <button @click="open = !open" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+              <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <span class="text-blue-600 font-medium text-sm" x-text="user.avatar"></span>
+              </div>
+              <i class="fas fa-chevron-down text-sm"></i>
+            </button>
+
+            <div x-show="open" @click.away="open = false" x-transition
+              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border py-2">
+              <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                <i class="fas fa-user mr-2"></i>My Profile
+              </a>
+              <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                <i class="fas fa-cog mr-2"></i>Settings
+              </a>
+              <hr class="my-1">
+              <a href="#" class="block px-4 py-2 text-red-600 hover:bg-red-50">
+                <i class="fas fa-sign-out-alt mr-2"></i>Log out
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex gap-6 lg:items-start">
+
+            
+            <!-- Sidebar -->
+            <aside
+                class="fixed inset-y-0 left-0 w-72 xl:w-80 transform -translate-x-full transition-transform lg:relative lg:transform-none lg:block bg-white/90 backdrop-blur-md shadow-xl rounded-xl lg:h-[calc(85vh-64px)] lg:overflow-y-auto lg:sticky lg:top-16 sidebar-scroll z-50 lg:z-30"
+                :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
+
+                <!-- Sidebar Overlay for Mobile -->
+                <div x-show="sidebarOpen" @click="sidebarOpen = false" x-transition.opacity
+                    class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+                <div
+                    class="relative z-50 h-full max-h-screen overflow-y-auto bg-white/90 backdrop-blur-md rounded-xl flex flex-col">
+
+                    <!-- Mobile Close Button -->
+                    <button @click="sidebarOpen = false"
+                        class="lg:hidden absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors z-10">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+
+          <!-- User Profile Section -->
+          <div class="p-6 border-b rounded-t-xl flex-shrink-0">
+            <div class="flex items-center space-x-3">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-user-circle text-blue-600 text-2xl"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 truncate" x-text="user.name"></h3>
+                <p class="text-sm text-gray-600 truncate" x-text="user.email"></p>
+                <div x-show="!user.verified" class="mt-1">
+                  <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Not Verified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Menu -->
+          <nav class="overflow-y-auto sidebar-scroll pt-6 pb-6">
+            <div class="px-4 mb-6">
+              <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Dashboard</h4>
+              <div class="space-y-1">
+                <a href="dashboard.html" 
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-home mr-3"></i>Home
+                </a>
+                <a href="domains.html" 
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors bg-blue-50 text-blue-700">
+                  <i class="fas fa-globe mr-3"></i>Domains
+                </a>
+              </div>
+            </div>
+
+            <div class="px-4 mb-6">
+              <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Billing</h4>
+              <div class="space-y-1">
+                <a href="invoice.html" 
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-file-invoice mr-3"></i>Invoices
+                </a>
+                <a href="cancelled-invoices.html"
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-ban mr-3"></i>Cancelled Invoices
+                </a>
+              </div>
+            </div>
+
+            <div class="px-4">
+              <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Account</h4>
+              <div class="space-y-1">
+                <a href="profile.html" 
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-user mr-3"></i>My Profile
+                </a>
+                <a href="verify-profile.html"
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-shield-alt mr-3"></i>Verify Profile
+                </a>
+                <a href="affiliate-account.html"
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-credit-card mr-3"></i>Affiliate Account
+                </a>
+                <a href="email-history.html"
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-mail-bulk mr-3"></i>Email History
+                </a>
+                <a href="change-password.html"
+                  class="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                  <i class="fas fa-key mr-3"></i>Change Password
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 min-w-0">
+        <!-- Breadcrumb -->
+        <div class="mb-6">
+          <nav class="flex" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-2">
+              <li>
+                <a href="domains.html" class="text-gray-500 hover:text-gray-700 transition-colors">
+                  <i class="fas fa-globe mr-1"></i>Domains
+                </a>
+              </li>
+              <li>
+                <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+              </li>
+              <li class="text-gray-900 font-medium" x-text="domainDetails.name"></li>
+            </ol>
+          </nav>
+        </div>
+
+        <!-- Domain Header -->
+        <div class="bg-white/90 backdrop-blur-md rounded-xl shadow-xl border border-white/20 overflow-hidden mb-6">
+          <div class="p-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div class="flex items-start space-x-4">
+                <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-globe text-blue-600 text-2xl"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <h1 class="text-2xl font-bold text-gray-900" x-text="domainDetails.name"></h1>
+                  <div class="flex flex-wrap items-center gap-3 mt-2">
+                    <span class="inline-flex px-3 py-1 text-sm font-semibold rounded-full" :class="{
+                      'bg-green-100 text-green-800': domainDetails.status === 'active',
+                      'bg-yellow-100 text-yellow-800': domainDetails.status === 'pending',
+                      'bg-red-100 text-red-800': domainDetails.status === 'expired'
+                    }" x-text="domainDetails.status.charAt(0).toUpperCase() + domainDetails.status.slice(1)"></span>
+                   
+                    <span class="text-sm text-gray-600">
+                      Expires: <span x-text="new Date(domainDetails.expiredDate).toLocaleDateString()"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button @click="showRenewModal = true" 
+                  class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                  <i class="fas fa-sync mr-2"></i>Renew Domain
+                </button>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="bg-white/90 backdrop-blur-md rounded-xl shadow-xl border border-white/20 overflow-hidden">
+          <div class="border-b border-gray-200">
+            <nav class="flex space-x-8 px-6" aria-label="Tabs">
+              <button @click="activeTab = 'overview'" 
+                class="py-4 px-1 border-b-2 font-medium text-sm transition-colors" 
+                :class="activeTab === 'overview' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                <i class="fas fa-info-circle mr-2"></i>Overview
+              </button>
+              <button @click="activeTab = 'invoices'" 
+                class="py-4 px-1 border-b-2 font-medium text-sm transition-colors" 
+                :class="activeTab === 'invoices' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                <i class="fas fa-file-invoice mr-2"></i>Invoices
+              </button>
+              <button @click="activeTab = 'emails'" 
+                class="py-4 px-1 border-b-2 font-medium text-sm transition-colors" 
+                :class="activeTab === 'emails' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                <i class="fas fa-envelope mr-2"></i>Email History
+              </button>
+              <button @click="activeTab = 'dns'" 
+                class="py-4 px-1 border-b-2 font-medium text-sm transition-colors" 
+                :class="activeTab === 'dns' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">
+                <i class="fas fa-server mr-2"></i>DNS Records
+              </button>
+            </nav>
+          </div>
+
+          <!-- Tab Content -->
+          <div class="p-6">
+            <!-- Overview Tab -->
+            <div x-show="activeTab === 'overview'" class="space-y-6">
+              <!-- Domain Information -->
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gray-50 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-4">Domain Information</h3>
+                  <div class="space-y-3">
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Domain Name:</span>
+                      <span class="font-medium" x-text="domainDetails.name"></span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Category:</span>
+                      <span class="font-medium" x-text="domainDetails.category"></span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Status:</span>
+                      <span class="font-medium capitalize" x-text="domainDetails.status"></span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Ordered Date:</span>
+                      <span class="font-medium" x-text="new Date(domainDetails.orderedDate).toLocaleDateString()"></span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Activated Date:</span>
+                      <span class="font-medium" x-text="new Date(domainDetails.activatedDate).toLocaleDateString()"></span>
+                    </div>
+                    <div class="flex justify-between py-2">
+                      <span class="text-gray-600">Expires Date:</span>
+                      <span class="font-medium" x-text="new Date(domainDetails.expiredDate).toLocaleDateString()"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-6">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-4">Business Information</h3>
+                  <div class="space-y-3">
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Business Name:</span>
+                      <span class="font-medium" x-text="domainDetails.businessName"></span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Business Type:</span>
+                      <span class="font-medium" x-text="domainDetails.businessType"></span>
+                    </div>
+                    <div class="flex justify-between py-2 border-b border-gray-200">
+                      <span class="text-gray-600">Registration No:</span>
+                      <span class="font-medium" x-text="domainDetails.registrationNumber"></span>
+                    </div>
+                    <div class="py-2 border-b border-gray-200">
+                      <span class="text-gray-600 block">Business Address:</span>
+                      <span class="font-medium" x-text="domainDetails.businessAddress"></span>
+                    </div>
+                    <div class="flex justify-between py-2">
+                      <span class="text-gray-600">Business Phone:</span>
+                      <span class="font-medium" x-text="domainDetails.businessPhone"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Registration Reason -->
+              <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Registration Reason</h3>
+                <p class="text-gray-700" x-text="domainDetails.reason"></p>
+              </div>
+            </div>
+
+            <!-- Invoices Tab -->
+            <div x-show="activeTab === 'invoices'">
+              <div class="overflow-hidden">
+                <div class="mb-4">
+                  <h3 class="text-lg font-semibold text-gray-900">Related Invoices</h3>
+                  <p class="text-sm text-gray-600">All invoices associated with this domain</p>
+                </div>
+
+                <!-- Mobile View -->
+                <div class="block lg:hidden space-y-4">
+                  <template x-for="invoice in invoices" :key="invoice.id">
+                    <div class="bg-gray-50 rounded-lg p-4">
+                      <div class="flex justify-between items-start mb-3">
+                        <div>
+                          <h4 class="font-medium text-gray-900" x-text="invoice.id"></h4>
+                          <p class="text-sm text-gray-600" x-text="invoice.description"></p>
+                        </div>
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full" :class="{
+                          'bg-green-100 text-green-800': invoice.status === 'paid',
+                          'bg-yellow-100 text-yellow-800': invoice.status === 'pending',
+                          'bg-red-100 text-red-800': invoice.status === 'overdue'
+                        }" x-text="invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)"></span>
+                      </div>
+                      <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span class="text-gray-600">Date:</span>
+                          <span class="font-medium" x-text="new Date(invoice.date).toLocaleDateString()"></span>
+                        </div>
+                        <div>
+                          <span class="text-gray-600">Amount:</span>
+                          <span class="font-medium">LKR <span x-text="invoice.amount.toLocaleString()"></span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+
+                <!-- Desktop View -->
+                <div class="hidden lg:block">
+                  <table class="w-full">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Invoice ID</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                      <template x-for="invoice in invoices" :key="invoice.id">
+                        <tr class="hover:bg-gray-50">
+                          <td class="px-4 py-4 text-sm font-medium text-gray-900" x-text="invoice.id"></td>
+                          <td class="px-4 py-4 text-sm text-gray-600" x-text="new Date(invoice.date).toLocaleDateString()"></td>
+                          <td class="px-4 py-4 text-sm text-gray-600" x-text="invoice.description"></td>
+                          <td class="px-4 py-4 text-sm font-medium text-gray-900">
+                            LKR <span x-text="invoice.amount.toLocaleString()"></span>
+                          </td>
+                          <td class="px-4 py-4">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full" :class="{
+                              'bg-green-100 text-green-800': invoice.status === 'paid',
+                              'bg-yellow-100 text-yellow-800': invoice.status === 'pending',
+                              'bg-red-100 text-red-800': invoice.status === 'overdue'
+                            }" x-text="invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)"></span>
+                          </td>
+                          <td class="px-4 py-4">
+                            <button class="text-blue-600 hover:text-blue-900 text-sm font-medium">
+                              <i class="fas fa-eye mr-1"></i>View
+                            </button>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emails Tab -->
+            <div x-show="activeTab === 'emails'">
+              <div class="mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Email History</h3>
+                <p class="text-sm text-gray-600">All emails sent regarding this domain</p></div>
+
+              <!-- Mobile View -->
+              <div class="block lg:hidden space-y-4">
+                <template x-for="email in emails" :key="email.id">
+                  <div class="bg-gray-50 rounded-lg p-4">
+                    <div class="flex justify-between items-start mb-3">
+                      <div class="flex-1 min-w-0">
+                        <h4 class="font-medium text-gray-900 truncate" x-text="email.subject"></h4>
+                        <p class="text-sm text-gray-600 mt-1" x-text="email.preview"></p>
+                      </div>
+                      <div class="flex items-center space-x-2 ml-4">
+                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full" :class="{
+                          'bg-blue-100 text-blue-800': email.type === 'notification',
+                          'bg-green-100 text-green-800': email.type === 'registration',
+                          'bg-yellow-100 text-yellow-800': email.type === 'reminder',
+                          'bg-purple-100 text-purple-800': email.type === 'payment'
+                        }" x-text="email.type.charAt(0).toUpperCase() + email.type.slice(1)"></span>
+                        <i class="fas fa-check-circle text-green-500" x-show="email.status === 'delivered'"></i>
+                      </div>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                      <span x-text="new Date(email.date).toLocaleDateString()"></span>
+                    </div>
+                  </div>
+                </template>
+              </div>
+
+              <!-- Desktop View -->
+              <div class="hidden lg:block">
+                <table class="w-full">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subject</th>
+                      <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                      <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                      <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                      <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-200">
+                    <template x-for="email in emails" :key="email.id">
+                      <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-4">
+                          <div>
+                            <div class="text-sm font-medium text-gray-900" x-text="email.subject"></div>
+                            <div class="text-sm text-gray-600 truncate" x-text="email.preview"></div>
+                          </div>
+                        </td>
+                        <td class="px-4 py-4">
+                          <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full" :class="{
+                            'bg-blue-100 text-blue-800': email.type === 'notification',
+                            'bg-green-100 text-green-800': email.type === 'registration',
+                            'bg-yellow-100 text-yellow-800': email.type === 'reminder',
+                            'bg-purple-100 text-purple-800': email.type === 'payment'
+                          }" x-text="email.type.charAt(0).toUpperCase() + email.type.slice(1)"></span>
+                        </td>
+                        <td class="px-4 py-4 text-sm text-gray-600" x-text="new Date(email.date).toLocaleDateString()"></td>
+                        <td class="px-4 py-4">
+                          <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2" x-show="email.status === 'delivered'"></i>
+                            <span class="text-sm text-gray-600 capitalize" x-text="email.status"></span>
+                          </div>
+                        </td>
+                        <td class="px-4 py-4">
+                          <button class="text-blue-600 hover:text-blue-900 text-sm font-medium">
+                            <i class="fas fa-eye mr-1"></i>View
+                          </button>
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- DNS Records Tab -->
+            <div x-show="activeTab === 'dns'" x-data="{ dnsView: 'nameservers', newRecord: { type: 'A', name: '', value: '', ttl: '3600', priority: '' } }">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">DNS Management</h3>
+                
+                <!-- DNS View Toggle -->
+                
+                
+
+                <!-- Resource Records View -->
+               
+                  <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-start">
+                      <i class="fas fa-info-circle text-blue-600 mt-0.5 mr-3"></i>
+                      <div>
+                        <h4 class="font-medium text-blue-800">DNS Resource Records</h4>
+                        <p class="text-sm text-blue-700 mt-1">Manage your DNS records. Changes typically take 5-10 minutes to take effect, but can take up to 24 hours globally.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Add New Record Form -->
+                  <div class="bg-gray-50 rounded-lg p-6 mb-6" x-data="{ showAddForm: false }">
+                    <div class="flex items-center justify-between mb-4">
+                      <h4 class="font-medium text-gray-900">DNS Records</h4>
+                      <button @click="showAddForm = !showAddForm" 
+                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        <i class="fas fa-plus mr-2"></i>Add Record
+                      </button>
+                    </div>
+
+                    <!-- Add Record Form -->
+                    <div x-show="showAddForm" x-transition class="bg-white rounded-lg p-4 border mb-4">
+                      <h5 class="font-medium text-gray-900 mb-4">Add New DNS Record</h5>
+                      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                          <select x-model="newRecord.type" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="A">A</option>
+                            <option value="AAAA">AAAA</option>
+                            <option value="CNAME">CNAME</option>
+                            <option value="MX">MX</option>
+                            <option value="TXT">TXT</option>
+                            <option value="NS">NS</option>
+                            <option value="SRV">SRV</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                          <input x-model="newRecord.name" type="text" placeholder="@, www, mail" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-2">Value</label>
+                          <input x-model="newRecord.value" type="text" placeholder="192.168.1.1" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                          <label class="block text-sm font-medium text-gray-700 mb-2">TTL</label>
+                          <select x-model="newRecord.ttl" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="300">5 minutes</option>
+                            <option value="1800">30 minutes</option>
+                            <option value="3600">1 hour</option>
+                            <option value="14400">4 hours</option>
+                            <option value="86400">24 hours</option>
+                          </select>
+                        </div>
+                        <div x-show="newRecord.type === 'MX'" class="md:col-span-2 lg:col-span-1">
+                          <label class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                          <input x-model="newRecord.priority" type="number" placeholder="10" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                      </div>
+                      <div class="flex justify-end space-x-3 mt-4">
+                        <button @click="showAddForm = false" 
+                          class="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">
+                          Cancel
+                        </button>
+                        <button class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+                          Add Record
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- DNS Records Table -->
+                    <!-- Mobile View -->
+                    <div class="block lg:hidden space-y-4">
+                      <template x-for="record in domainDetails.dnsRecords" :key="record.name + record.type">
+                        <div class="bg-white rounded-lg p-4 border">
+                          <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1 min-w-0">
+                              <div class="flex items-center space-x-2 mb-2">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded bg-blue-100 text-blue-800" x-text="record.type"></span>
+                                <span class="font-medium text-gray-900" x-text="record.name || '@'"></span>
+                              </div>
+                              <p class="text-sm text-gray-600 break-all" x-text="record.value"></p>
+                              <div class="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                                <span>TTL: <span x-text="record.ttl"></span>s</span>
+                                <span x-show="record.priority">Priority: <span x-text="record.priority"></span></span>
+                              </div>
+                            </div>
+                            <div class="flex space-x-2 ml-4">
+                              <button class="text-blue-600 hover:text-blue-900">
+                                <i class="fas fa-edit"></i>
+                              </button>
+                              <button class="text-red-600 hover:text-red-900">
+                                <i class="fas fa-trash"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+
+                    <!-- Desktop View -->
+                    <div class="hidden lg:block">
+                      <table class="w-full">
+                        <thead class="bg-gray-100">
+                          <tr>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Value</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">TTL</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Priority</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                          <template x-for="record in domainDetails.dnsRecords" :key="record.name + record.type">
+                            <tr class="hover:bg-gray-50">
+                              <td class="px-4 py-4">
+                                <span class="inline-flex px-2 py-1 text-xs font-semibold rounded bg-blue-100 text-blue-800" x-text="record.type"></span>
+                              </td>
+                              <td class="px-4 py-4 text-sm font-medium text-gray-900" x-text="record.name || '@'"></td>
+                              <td class="px-4 py-4 text-sm text-gray-600 break-all" x-text="record.value"></td>
+                              <td class="px-4 py-4 text-sm text-gray-600"><span x-text="record.ttl"></span>s</td>
+                              <td class="px-4 py-4 text-sm text-gray-600" x-text="record.priority || '-'"></td>
+                              <td class="px-4 py-4">
+                                <div class="flex space-x-2">
+                                  <button class="text-blue-600 hover:text-blue-900 text-sm">
+                                    <i class="fas fa-edit mr-1"></i>Edit
+                                  </button>
+                                  <button class="text-red-600 hover:text-red-900 text-sm">
+                                    <i class="fas fa-trash mr-1"></i>Delete
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </template>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Renew Domain Modal -->
+  <div x-show="showRenewModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div @click.away="showRenewModal = false" class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-lg font-semibold text-gray-900">Renew Domain</h3>
+        <button @click="showRenewModal = false" class="text-gray-400 hover:text-gray-600">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="mb-6">
+        <div class="bg-blue-50 rounded-lg p-4 mb-4">
+          <div class="flex items-center">
+            <i class="fas fa-globe text-blue-600 mr-3"></i>
+            <div>
+              <h4 class="font-medium text-blue-900" x-text="domainDetails.name"></h4>
+              <p class="text-sm text-blue-700">Current expiry: <span x-text="new Date(domainDetails.expiredDate).toLocaleDateString()"></span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <label class="block">
+            <input type="radio" name="renewal" value="1" class="mr-2" checked>
+            <span class="text-gray-900">1 Year - LKR 2,500</span>
+            <span class="block text-sm text-gray-600 ml-6">Expires: <span x-text="new Date(new Date(domainDetails.expiredDate).getTime() + 365*24*60*60*1000).toLocaleDateString()"></span></span>
+          </label>
+          <label class="block">
+            <input type="radio" name="renewal" value="2" class="mr-2">
+            <span class="text-gray-900">2 Years - LKR 4,750 <span class="text-green-600 text-sm">(Save LKR 250)</span></span>
+            <span class="block text-sm text-gray-600 ml-6">Expires: <span x-text="new Date(new Date(domainDetails.expiredDate).getTime() + 2*365*24*60*60*1000).toLocaleDateString()"></span></span>
+          </label>
+          <label class="block">
+            <input type="radio" name="renewal" value="5" class="mr-2">
+            <span class="text-gray-900">5 Years - LKR 11,250 <span class="text-green-600 text-sm">(Save LKR 1,250)</span></span>
+            <span class="block text-sm text-gray-600 ml-6">Expires: <span x-text="new Date(new Date(domainDetails.expiredDate).getTime() + 5*365*24*60*60*1000).toLocaleDateString()"></span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex space-x-3">
+        <button @click="showRenewModal = false" 
+          class="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">
+          Cancel
+        </button>
+        <button class="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors">
+          <i class="fas fa-credit-card mr-2"></i>Proceed to Payment
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-globe text-white text-xl"></i>
+                        </div>
+                        <div
+                            class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            LK Domains
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6 max-w-md">
+                        Sri Lanka's most trusted .LK domain registrar. We've been helping individuals and businesses
+                        establish their online presence since 2010.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors">About Us</a>
+                        </li>
+                        <li><a href="#features" class="text-gray-300 hover:text-blue-400 transition-colors">Features</a>
+                        </li>
+                        <li><a href="#pricing" class="text-gray-300 hover:text-blue-400 transition-colors">Pricing</a>
+                        </li>
+                        <li><a href="#faq" class="text-gray-300 hover:text-blue-400 transition-colors">FAQ</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition-colors">Domain
+                                Registration</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition-colors">Domain Transfer</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-blue-400 transition-colors">DNS Management</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+            </div>
+            <div class="max-w-6xl mx-auto px-6 text-center">
+                <p class="text-lg font-bold">LK Domains</p>
+                <p class="mt-2">© 2025 All rights reserved. Designed by Peek Hosting</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
